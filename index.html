@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لقطة | Laqta</title>
+<meta name="description" content="لقطة: بنكتب ونصوّر ونمنتج وندير صفحات البراندات في مصر والخليج.">
+<meta property="og:title" content="لقطة | Laqta">
+<meta property="og:description" content="بنمسك لقطتك.. وإنت كمّل شغلك.">
+<meta property="og:image" content="assets/laqta-logo.png">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090b;--bg2:#0f0f12;--card:#151518;--line:#26262c;--tx:#f4f2ee;--mut:#a09ea8;--acc:#FF4B2B;--max:1180px;--ease:cubic-bezier(.2,.7,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:Tajawal,Inter,system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html[lang=en] body{font-family:Inter,Tajawal,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:auto;padding:0 20px}
+section{padding:84px 0;position:relative}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--acc);font-weight:700;font-size:13px;letter-spacing:.5px;margin-bottom:10px}
+.eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--acc);animation:blink 1.4s infinite}
+h2{font-size:clamp(28px,4.6vw,46px);font-weight:900;line-height:1.2;margin-bottom:12px}
+.lead{color:var(--mut);max-width:620px;font-size:17px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.rv.zoom{transform:scale(.94)}
+.rv.zoom.in{transform:none}
+
+/* progress bar */
+#bar{position:fixed;top:0;inset-inline-start:0;height:3px;background:var(--acc);width:0;z-index:100;box-shadow:0 0 12px var(--acc)}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:#09090bcc;backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:.3s}
+nav.sc{border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:66px}
+.nav img.logo{height:34px;width:auto}
+.nav ul{display:none;list-style:none;gap:24px;font-size:15px;color:var(--mut)}
+.nav ul a{position:relative}
+.nav ul a::after{content:"";position:absolute;bottom:-4px;inset-inline-start:0;width:0;height:2px;background:var(--acc);transition:width .3s var(--ease)}
+.nav ul a:hover{color:var(--tx)}.nav ul a:hover::after{width:100%}
+@media(min-width:860px){.nav ul{display:flex}}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--acc);color:#fff;border:0;border-radius:999px;padding:13px 24px;font:inherit;font-weight:800;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px #ff4b2b99}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,#ffffff55,transparent);transform:skewX(-20deg);animation:shine 3.5s infinite}
+@keyframes shine{0%,70%{left:-60%}100%{left:130%}}
+.btn.ghost{background:transparent;border:1px solid #3a3a42;color:var(--tx)}
+.btn.ghost::after{display:none}
+.btn.sm{padding:8px 16px;font-size:14px}
+.btn svg{width:18px;height:18px;fill:currentColor}
+.lang{background:transparent;color:var(--tx);border:1px solid #3a3a42;border-radius:999px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer}
+
+/* hero */
+.hero{padding:56px 0 30px;position:relative;overflow:hidden;min-height:calc(100vh - 66px);display:flex;flex-direction:column;justify-content:center}
+.hero .spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(500px circle at var(--mx,70%) var(--my,30%),#ff4b2b26,transparent 60%);transition:background .1s}
+.hero .grain{position:absolute;inset:0;pointer-events:none;opacity:.06;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:3px 3px}
+.rec{display:inline-flex;align-items:center;gap:10px;font:600 12.5px/1 Inter,monospace;letter-spacing:1px;color:var(--mut);margin-bottom:22px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:#0009}
+.rec i{width:10px;height:10px;border-radius:50%;background:var(--acc);animation:blink 1.1s infinite}
+.rec b{color:var(--tx);font-variant-numeric:tabular-nums;font-weight:600}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-size:clamp(38px,7.6vw,84px);font-weight:900;line-height:1.12;margin-bottom:20px;max-width:960px}
+.hero h1 .hw{display:inline-block;opacity:0;transform:translateY(60%) rotate(4deg);filter:blur(8px);animation:wordIn .9s var(--ease) forwards;animation-delay:calc(var(--i)*90ms + .15s)}
+.hero h1 em{font-style:normal;color:var(--acc)}
+@keyframes wordIn{to{opacity:1;transform:none;filter:none}}
+.hero p.sub{color:var(--mut);font-size:clamp(16px,2.2vw,20px);max-width:620px;margin-bottom:30px;opacity:0;animation:fadeUp .9s var(--ease) .9s forwards}
+.hero .cta{opacity:0;animation:fadeUp .9s var(--ease) 1.05s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+
+/* reel strip */
+.strip{position:relative;margin-top:46px;direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:12px;width:max-content;animation:marq var(--dur,60s) linear infinite}
+.track.rev{animation-direction:reverse}
+.strip:hover .track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+.reel{position:relative;flex:none;width:132px;aspect-ratio:9/14;border-radius:12px;overflow:hidden;background:#1a1a1e;border:1px solid #ffffff14;transition:transform .35s var(--ease)}
+.reel:hover{transform:translateY(-6px) scale(1.04)}
+.reel img{width:100%;height:100%;object-fit:cover}
+.reel span{position:absolute;bottom:6px;left:6px;background:var(--acc);border-radius:5px;padding:1px 7px;font:800 11px Inter;color:#fff}
+.strip+.strip{margin-top:12px}
+@media(min-width:760px){.reel{width:160px}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:40px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--bg);padding:22px 20px;position:relative}
+.stat b{display:block;font:900 clamp(32px,5vw,50px)/1.1 Inter,sans-serif;letter-spacing:-1.5px;direction:ltr;text-align:start}
+html[dir=rtl] .stat b{text-align:right}
+.stat span{color:var(--mut);font-size:14px}
+
+/* logos marquee */
+.logos{direction:ltr;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);margin-top:34px}
+.logos .track{gap:16px;--dur:45s}
+.logos:hover .track{animation-play-state:paused}
+.lg{flex:none;width:120px;height:120px;border-radius:22px;overflow:hidden;border:1px solid #ffffff14;background:#fff;display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease),box-shadow .35s;position:relative}
+.lg img{width:100%;height:100%;object-fit:cover}
+.lg.ct img{object-fit:contain;padding:12px}
+.lg:hover{transform:translateY(-6px) rotate(-3deg);box-shadow:0 18px 40px -12px #ff4b2b66}
+@media(min-width:760px){.lg{width:140px;height:140px}}
+.lg-name{display:block;text-align:center;font-size:12.5px;color:var(--mut);margin-top:8px;direction:rtl}
+.lgw{flex:none;text-align:center}
+
+/* cases */
+.cases{display:grid;gap:16px;margin-top:34px}
+@media(min-width:760px){.cases{grid-template-columns:1fr 1fr}}
+.case{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);min-height:380px;display:flex;align-items:flex-end;background:#151518;isolation:isolate}
+.case .bg{position:absolute;inset:-6%;background-size:cover;background-position:center;opacity:.6;transition:transform 1.2s var(--ease),opacity .5s;transform:scale(1.02) translateY(var(--py,0px));z-index:-2}
+.case:hover .bg{transform:scale(1.12) translateY(var(--py,0px));opacity:.8}
+.case::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#09090b10 10%,#09090bf5 88%);z-index:-1}
+.case .corner{position:absolute;width:26px;height:26px;border:3px solid #fff;opacity:0;transition:.4s var(--ease)}
+.case .c1{top:16px;inset-inline-start:16px;border-inline-end:0;border-bottom:0;transform:translate(10px,10px)}
+.case .c2{bottom:16px;inset-inline-end:16px;border-inline-start:0;border-top:0;transform:translate(-10px,-10px)}
+.case:hover .corner{opacity:1;transform:none}
+.case .rd{position:absolute;top:18px;inset-inline-end:18px;display:flex;gap:6px;align-items:center;font:700 11px Inter;opacity:0;transition:.4s}
+.case .rd::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--acc);animation:blink 1s infinite}
+.case:hover .rd{opacity:1}
+.case .in{padding:26px;width:100%}
+.case .clogo{width:46px;height:46px;border-radius:12px;overflow:hidden;margin-bottom:12px;border:1px solid #ffffff22}
+.case .clogo img{width:100%;height:100%;object-fit:cover}
+.case .tag{font:700 12px Inter;letter-spacing:.8px;color:var(--acc)}
+.case h3{font-size:28px;font-weight:900;margin:2px 0 6px}
+.case p{color:#d4d2d9;font-size:15px;max-width:480px}
+.case .num{font:900 clamp(38px,5.4vw,56px)/1 Inter;margin-top:14px;letter-spacing:-1.5px;direction:ltr;display:inline-block}
+.case .num small{font-size:13px;font-weight:500;color:var(--mut);letter-spacing:0;margin-inline-start:8px}
+.badge{display:inline-block;font-size:12px;border:1px solid #ffffff33;border-radius:999px;padding:2px 10px;color:#ddd;margin-top:12px;background:#00000066}
+.strat{display:grid;gap:14px;margin-top:16px}
+@media(min-width:760px){.strat{grid-template-columns:repeat(3,1fr)}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;transition:border-color .3s,transform .4s var(--ease)}
+.box:hover{border-color:#ff4b2b66;transform:translateY(-4px)}
+.box h3{font-size:18px;margin-bottom:6px}
+.box p{color:var(--mut);font-size:15px}
+.box .top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.box .top img{width:42px;height:42px;border-radius:10px;object-fit:cover;background:#fff}
+.box .k{font:900 26px Inter;direction:ltr}
+
+/* work */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 22px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;font:inherit;font-size:14px;cursor:pointer;transition:.25s}
+html[dir=rtl] .chip{padding:6px 6px 6px 14px}
+.chip img{width:24px;height:24px;border-radius:50%;object-fit:cover;background:#fff}
+.chip.all{padding:6px 16px!important}
+.chip:hover{border-color:#555;color:var(--tx)}
+.chip.on{background:var(--tx);color:#09090b;border-color:var(--tx);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+.w{position:relative;display:block;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line);transition:transform .4s var(--ease),border-color .3s;opacity:0;animation:cardIn .6s var(--ease) forwards;animation-delay:calc(var(--i)*45ms)}
+@keyframes cardIn{from{opacity:0;translate:0 18px;scale:.97}to{opacity:1;translate:0 0;scale:1}}
+a.w:hover{border-color:#ff4b2b88;transform:translateY(-4px)}
+.w .th{position:relative;aspect-ratio:4/5;background:#121215;overflow:hidden}
+.w .th>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+a.w:hover .th>img{transform:scale(1.08)}
+.w .th.lo>img.blur{filter:blur(22px) brightness(.5) saturate(1.3);transform:scale(1.3)}
+.w .th.lo>img.mark{inset:auto;position:absolute;top:50%;left:50%;width:46%;height:auto;aspect-ratio:1;object-fit:cover;transform:translate(-50%,-50%);border-radius:18px;box-shadow:0 12px 30px #0008}
+a.w:hover .th.lo>img.mark{transform:translate(-50%,-50%) scale(1.08)}
+.w .th.lo>img.mark.ct{object-fit:contain;background:#fff;padding:8px}
+.w .play{position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#ff4b2be6;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.6);transition:.35s var(--ease);z-index:3}
+.w .play::before{content:"";border-left:15px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+a.w:hover .play{opacity:1;transform:none}
+.w .plat{position:absolute;top:8px;inset-inline-start:8px;z-index:2;background:#000b;border-radius:6px;padding:2px 8px;font:600 11px Inter}
+.w .views{position:absolute;bottom:8px;inset-inline-start:8px;z-index:2;background:var(--acc);border-radius:6px;padding:2px 8px;font:800 12px Inter}
+.w .meta{padding:10px 12px}
+.w .meta b{display:block;font-size:14px;line-height:1.45}
+.w .meta span{color:var(--mut);font-size:12.5px}
+.more{display:flex;justify-content:center;margin-top:26px}
+
+/* services */
+.svc{display:grid;gap:14px;margin-top:34px}
+@media(min-width:700px){.svc{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.svc{grid-template-columns:repeat(3,1fr)}}
+.svc .box{position:relative;overflow:hidden}
+.svc .box::before{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--x,50%) var(--y,50%),#ff4b2b1f,transparent 60%);opacity:0;transition:opacity .3s}
+.svc .box:hover::before{opacity:1}
+.svc .box .n{font:800 13px Inter;color:var(--acc);margin-bottom:10px;position:relative}
+.svc .box h3,.svc .box p{position:relative}
+.steps{display:grid;gap:22px;margin-top:34px;counter-reset:s}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{position:relative;padding-top:18px}
+.step::before{content:"";position:absolute;top:0;inset-inline-start:0;height:2px;width:0;background:var(--acc);transition:width 1.1s var(--ease);transition-delay:var(--d,0s)}
+.step.in::before{width:100%}
+.step b{display:block;font-size:20px;margin-bottom:6px}
+.step b i{font:900 14px Inter;color:var(--acc);font-style:normal;margin-inline-end:8px}
+.step p{color:var(--mut);font-size:15px}
+.tools{direction:ltr;overflow:hidden;margin-top:46px;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.tools .track{gap:10px;--dur:40s}
+.tools span{flex:none;border:1px solid var(--line);border-radius:999px;padding:7px 16px;font:500 14px Inter;color:var(--mut)}
+
+/* contact */
+.contact{text-align:center;overflow:hidden}
+.contact::before{content:"";position:absolute;left:50%;bottom:-260px;width:700px;height:520px;margin-left:-350px;background:radial-gradient(closest-side,#ff4b2b40,transparent);animation:pulse 5s ease-in-out infinite;pointer-events:none}
+@keyframes pulse{50%{transform:scale(1.15);opacity:.7}}
+.contact h2{max-width:760px;margin-inline:auto;font-size:clamp(32px,6vw,62px)}
+.contact .cta{justify-content:center;margin-top:26px}
+.contact .vf{display:inline-block;position:relative;padding:34px 26px}
+.contact .vf i{position:absolute;width:30px;height:30px;border:3px solid var(--tx)}
+.contact .vf i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
+.contact .vf i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
+.contact .vf i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
+.contact .vf i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
+.contact .vf.in i{animation:focus 1.2s var(--ease)}
+@keyframes focus{0%{transform:scale(1.6);opacity:0}100%{transform:none;opacity:1}}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+footer img{height:26px}
+.fab{position:fixed;bottom:20px;inset-inline-end:20px;z-index:60;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px -6px #25d36699;transform:scale(0);transition:transform .4s var(--ease)}
+.fab.on{transform:scale(1)}
+.fab svg{width:28px;height:28px;fill:#fff}
+.fab::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:ring 2s infinite}
+@keyframes ring{to{transform:scale(1.6);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv,.w,.hero h1 .hw,.hero p.sub,.hero .cta{opacity:1!important;transform:none!important;filter:none!important}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav id="nav"><div class="wrap nav">
+  <a href="#top" aria-label="Laqta"><img class="logo" src="assets/laqta-logo.png" alt="لقطة | Laqta"></a>
+  <ul>
+    <li><a href="#work" data-i18n="nav_work"></a></li>
+    <li><a href="#cases" data-i18n="nav_cases"></a></li>
+    <li><a href="#services" data-i18n="nav_services"></a></li>
+    <li><a href="#contact" data-i18n="nav_contact"></a></li>
+  </ul>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button class="lang" id="langBtn" type="button">EN</button>
+    <a class="btn sm wa" href="#" target="_blank" rel="noopener" data-i18n="cta_talk"></a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="spot"></div><div class="grain"></div>
+  <div class="wrap" style="position:relative">
+    <div class="rec"><i></i>REC <b id="tc">00:00:00:00</b> · LAQTA</div>
+    <h1 id="heroTitle"></h1>
+    <p class="sub" data-i18n="hero_sub"></p>
+    <div class="cta">
+      <a class="btn wa" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg><span data-i18n="cta_whatsapp"></span></a>
+      <a class="btn ghost" href="#work" data-i18n="cta_work"></a>
+    </div>
+  </div>
+  <div class="strip"><div class="track" id="strip1" style="--dur:70s"></div></div>
+  <div class="strip"><div class="track rev" id="strip2" style="--dur:80s"></div></div>
+  <div class="wrap"><div class="stats rv" id="stats"></div></div>
+</header>
+
+<section id="clients"><div class="wrap">
+  <div class="eyebrow rv" data-i18n="eb_clients"></div>
+  <h2 class="rv" style="--d:.08s" data-i18n="h_clients"></h2>
+  <p class="lead rv" style="--d:.16s" data-i18n="p_clients"></p>
+</div>
+  <div class="logos rv" style="--d:.2s"><div class="track" id="logoTrack"></div></div>
+  <div class="logos rv" style="--d:.28s;margin-top:16px"><div class="track rev" id="logoTrack2" style="--dur:52s"></div></div>
+</section>
+
+<section id="cases" style="background:var(--bg2)"><div class="wrap">
+  <div class="eyebrow rv" data-i18n="eb_cases"></div>
+  <h2 class="rv" style="--d:.08s" data-i18n="h_cases"></h2>
+  <p class="lead rv" style="--d:.16s" data-i18n="p_cases"></p>
+  <div class="cases" id="caseGrid"></div>
+  <div class="strat" id="stratGrid"></div>
+</div></section>
+
+<section id="work"><div class="wrap">
+  <div class="eyebrow rv" data-i18n="eb_work"></div>
+  <h2 class="rv" style="--d:.08s" data-i18n="h_work"></h2>
+  <p class="lead rv" style="--d:.16s" data-i18n="p_work"></p>
+  <div class="chips rv" style="--d:.2s" id="chips"></div>
+  <div class="grid" id="workGrid"></div>
+  <div class="more"><button class="btn ghost" id="moreBtn" type="button"></button></div>
+</div></section>
+
+<section id="services" style="background:var(--bg2)"><div class="wrap">
+  <div class="eyebrow rv" data-i18n="eb_services"></div>
+  <h2 class="rv" style="--d:.08s" data-i18n="h_services"></h2>
+  <div class="svc" id="svcGrid"></div>
+  <h2 class="rv" style="margin-top:70px;font-size:clamp(24px,3.6vw,34px)" data-i18n="h_process"></h2>
+  <div class="steps" id="steps"></div>
+</div>
+  <div class="tools rv"><div class="track" id="tools"></div></div>
+</section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <div class="vf rv" id="vf"><i></i><i></i><i></i><i></i>
+    <h2 data-i18n="h_contact"></h2>
+    <p class="lead" style="margin-inline:auto" data-i18n="p_contact"></p>
+  </div>
+  <div class="cta rv" style="--d:.2s"><a class="btn wa" href="#" target="_blank" rel="noopener"><span data-i18n="cta_whatsapp"></span></a></div>
+</div></section>
+
+<footer><div class="wrap">
+  <img src="assets/laqta-logo.png" alt="Laqta">
+  <span data-i18n="foot"></span>
+</div></footer>
+<a class="fab wa" id="fab" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg></a>
+
+<script>
+/* رقم الواتساب: غيّره هنا لما يبقى فيه رقم للوكالة */
+const WHATSAPP="201273122625";
+const IMG={"logo-2xko": "assets/img/logo-2xko.webp", "logo-ciib": "assets/img/logo-ciib.webp", "logo-compuart": "assets/img/logo-compuart.webp", "logo-darak": "assets/img/logo-darak.webp", "logo-eleven": "assets/img/logo-eleven.webp", "logo-elturkey": "assets/img/logo-elturkey.webp", "logo-fwz": "assets/img/logo-fwz.webp", "logo-gl": "assets/img/logo-gl.webp", "logo-infinix": "assets/img/logo-infinix.webp", "logo-lazeez": "assets/img/logo-lazeez.webp", "logo-mimi": "assets/img/logo-mimi.webp", "logo-mpl": "assets/img/logo-mpl.webp", "logo-mta": "assets/img/logo-mta.webp", "logo-nervehq": "assets/img/logo-nervehq.webp", "logo-qabda": "assets/img/logo-qabda.webp", "logo-redbull": "assets/img/logo-redbull.webp", "logo-tyres": "assets/img/logo-tyres.webp", "th-7581866171146784008": "assets/img/th-7581866171146784008.webp", "th-7584501612803001620": "assets/img/th-7584501612803001620.webp", "th-7584805008894610708": "assets/img/th-7584805008894610708.webp", "th-7590024074282142992": "assets/img/th-7590024074282142992.webp", "th-7634651636220054792": "assets/img/th-7634651636220054792.webp", "th-7635258428973124871": "assets/img/th-7635258428973124871.webp", "th-7635663145482079505": "assets/img/th-7635663145482079505.webp", "th-7635669343023435025": "assets/img/th-7635669343023435025.webp", "th-7637529228568792328": "assets/img/th-7637529228568792328.webp", "th-7673119208703528200": "assets/img/th-7673119208703528200.webp", "th-7673575762233969936": "assets/img/th-7673575762233969936.webp", "th-7674953908250365201": "assets/img/th-7674953908250365201.webp", "th-7686086845595274503": "assets/img/th-7686086845595274503.webp", "th-7702832627035770133": "assets/img/th-7702832627035770133.webp", "th-Dc1g2-akRE2": "assets/img/th-Dc1g2-akRE2.webp", "th-Dc3OxrsjQ8Z": "assets/img/th-Dc3OxrsjQ8Z.webp", "th-Dd9geEMFNk_": "assets/img/th-Dd9geEMFNk_.webp", "th-DdO1ZQnj8eE": "assets/img/th-DdO1ZQnj8eE.webp", "th-DdRaKk3DDxy": "assets/img/th-DdRaKk3DDxy.webp", "th-DdkEvmDj6Qg": "assets/img/th-DdkEvmDj6Qg.webp", "th-DfB9FoKoOXE": "assets/img/th-DfB9FoKoOXE.webp", "th-DfRgvEKicse": "assets/img/th-DfRgvEKicse.webp", "th-DfT-ju-CXhk": "assets/img/th-DfT-ju-CXhk.webp", "th-DffdX0kj3Aj": "assets/img/th-DffdX0kj3Aj.webp", "th-Dfkm3Exil0_": "assets/img/th-Dfkm3Exil0_.webp", "th-DfnLpn4jdig": "assets/img/th-DfnLpn4jdig.webp", "th-DfnLsftAXRM": "assets/img/th-DfnLsftAXRM.webp", "th-fb1057209213729841": "assets/img/th-fb1057209213729841.webp", "th-fb1060962209734755": "assets/img/th-fb1060962209734755.webp", "th-fb1084867821033044": "assets/img/th-fb1084867821033044.webp", "th-fb1627232165425836": "assets/img/th-fb1627232165425836.webp", "th-fb2315854579260129": "assets/img/th-fb2315854579260129.webp", "th-fb2454589875074671": "assets/img/th-fb2454589875074671.webp", "th-li7515682868812132353": "assets/img/th-li7515682868812132353.webp", "th-li7517494716297441280": "assets/img/th-li7517494716297441280.webp", "th-li7518220315320066049": "assets/img/th-li7518220315320066049.webp", "th-li7520032666377830400": "assets/img/th-li7520032666377830400.webp", "th-li7520756350897774592": "assets/img/th-li7520756350897774592.webp", "th-li7522946229237088256": "assets/img/th-li7522946229237088256.webp", "th-li7523670992246976512": "assets/img/th-li7523670992246976512.webp", "th-li7525482532868521984": "assets/img/th-li7525482532868521984.webp", "th-li7526570401485881344": "assets/img/th-li7526570401485881344.webp"};
+const im=k=>IMG[k]||"";
+
+const T={
+ar:{
+ nav_work:"الشغل",nav_cases:"حملات",nav_services:"بنعمل إيه",nav_contact:"كلّمنا",cta_talk:"كلّمنا",cta_work:"شوف شغلنا",cta_whatsapp:"ابعتلنا واتساب",
+ hero:["بنمسك","لقطتك..","وإنت","كمّل","شغلك"],heroAcc:[3,4],
+ hero_sub:"بنكتب ونصوّر ونمنتج وندير صفحات براندات زي لذيذ الشام وCompuArt و2XKO. إنت مشغول بشغلك، والصفحة علينا.",
+ s1:"مشاهدة على شغلنا",s2:"براند اشتغلنا معاهم",s3:"دول: مصر والإمارات والسعودية",s4:"متابع على صفحات بنديرها",
+ eb_clients:"اشتغلنا مع",h_clients:"من مطعم شاورما لبطولة ألعاب",p_clients:"مطاعم، شركات كمبيوتر وبرمجة، إيفنتات ألعاب، شركات سفر وعقارات. كل واحد فيهم محتاج كلام مختلف، وبنعرف نكلّم كل جمهور بلغته.",
+ eb_cases:"حملات",h_cases:"شغل اتشاف بجد",p_cases:"الأرقام دي من صفحات العملاء نفسها.",
+ eb_work:"كل الشغل",h_work:"اتفرّج بنفسك",p_work:"اختار البراند، ودوس على أي فيديو يفتحلك مكان ما نزل.",
+ eb_services:"بنعمل إيه",h_services:"كل اللي صفحتك محتاجاه",h_process:"الشغل معانا ماشي إزاي",
+ h_contact:"عندك براند؟ ورّينا",p_contact:"ابعتلنا اسم صفحتك على واتساب، وهنرجعلك بأفكار تنفع لها.",
+ all:"الكل",more:"شوف باقي الشغل",less:"أقل",views:"مشاهدة",
+ foot:"© 2026 لقطة · القاهرة",prod_fwz:"بالتعاون مع FWZ"
+},
+en:{
+ nav_work:"Work",nav_cases:"Campaigns",nav_services:"What we do",nav_contact:"Contact",cta_talk:"Talk to us",cta_work:"See our work",cta_whatsapp:"Message us on WhatsApp",
+ hero:["We","catch","your","moment.","You","keep","working."],heroAcc:[4,5,6],
+ hero_sub:"We write, shoot, edit and run pages for brands like Lazeez El Sham, CompuArt and 2XKO. You run your business; we've got the page.",
+ s1:"views on our work",s2:"brands we've worked with",s3:"countries: Egypt, UAE, KSA",s4:"followers on pages we run",
+ eb_clients:"WORKED WITH",h_clients:"From a shawarma spot to a gaming tournament",p_clients:"Restaurants, PC and software companies, gaming events, travel and real estate. Each one talks to a different crowd, and we know how to talk to each.",
+ eb_cases:"CAMPAIGNS",h_cases:"Work people actually watched",p_cases:"These numbers come straight from the clients' own pages.",
+ eb_work:"ALL WORK",h_work:"See for yourself",p_work:"Pick a brand and tap any piece to open it where it was posted.",
+ eb_services:"WHAT WE DO",h_services:"Everything your page needs",h_process:"How working with us goes",
+ h_contact:"Got a brand? Show us",p_contact:"Send us your page on WhatsApp and we'll come back with ideas that fit it.",
+ all:"All",more:"See the rest",less:"Show less",views:"views",
+ foot:"© 2026 Laqta · Cairo",prod_fwz:"With FWZ"
+}};
+
+/* لوجوهات: [مفتاح, اسم, عرض كامل؟] */
+const CLIENTS=[["lazeez",{ar:"لذيذ الشام",en:"Lazeez El Sham"}],["2xko","2XKO"],["compuart","CompuArt"],["redbull","Red Bull"],["qabda",{ar:"قبضة",en:"Qabda"},1],["infinix","Infinix"],["gl","Gamers Lounge"],["mpl","MPL MENA"],["fwz","FWZ Esports"],["nervehq","NerveHQ",1],["tyres","TyresOnline"],["mimi","Mimi's Dough",1],["darak","Darak KSA"],["eleven","11:11 Production"],["mta","MTA Travel"],["elturkey","El Turkey Group"],["ciib","CIIB",1]];
+const FIT_CT=new Set(["qabda","nervehq","mimi","ciib"]);
+
+const CASES=[
+ {logo:"2xko",bg:"7590024074282142992",name:"2XKO",num:"3.76M",tag:{ar:"جولة الجامعات",en:"University tour"},d:{ar:"لفّينا على جامعات مصر وسألنا الطلبة رأيهم في اللعبة وهما بيجرّبوها. الفيديوهات اتعرضت إعلانات وعدّت 3.7 مليون مشاهدة.",en:"We toured Egyptian universities and caught students' reactions as they played. The videos ran as ads and passed 3.7M views."},fwz:1},
+ {logo:"lazeez",bg:"7702832627035770133",name:{ar:"لذيذ الشام",en:"Lazeez El Sham"},num:"1.77M",tag:{ar:"ماسكين الصفحة كلها",en:"Full page management"},d:{ar:"الأفكار والإسكتشات الكوميدي والتصوير والمونتاج كلهم علينا. ريل واحد بس جاب 1.23 مليون على تيك توك.",en:"Ideas, comedy sketches, shooting and editing are all on us. One reel alone pulled 1.23M on TikTok."}},
+ {logo:"qabda",bg:"7634651636220054792",name:{ar:"قبضة",en:"Qabda"},num:"1.23M",tag:{ar:"إيفنت ألعاب قتال",en:"Fighting-games event"},d:{ar:"أكبر إيفنت ألعاب قتال في مصر. عملنا البرومو قبله، وغطّيناه من جوّه، وطلّعنا منه 27 فيديو.",en:"Egypt's biggest fighting-games event. We made the promos, covered it from inside, and cut 27 videos out of it."},fwz:1},
+ {logo:"infinix",bg:"7584501612803001620",name:"Infinix Note 50s",num:"353K",tag:{ar:"إطلاق في الجامعات",en:"Campus launch"},d:{ar:"كنا على الأرض في الجامعات مع إطلاق الموبايل، وقطّعنا اليوم لفيديوهات قصيرة.",en:"We were on campus for the phone's launch and cut the day into short videos."},fwz:1}
+];
+const STRAT=[
+ {logo:"compuart",k:"630K+",t:{ar:"إعلانات CompuArt",en:"CompuArt ads"},d:{ar:"حملة ممولة لتجميعات الكمبيوتر. جرّبنا 3 نسخ من الإعلان لحد ما عدّت 630 ألف مشاهدة.",en:"A paid campaign for custom PC builds. We tested 3 versions of the ad and passed 630K views."}},
+ {logo:"tyres",k:"EG · UAE",t:{ar:"TyresOnline",en:"TyresOnline"},d:{ar:"كتبنا استراتيجية البراند وخطة محتوى فبراير ورمضان، ونزّلنا ريلز وبوستات لمصر والإمارات.",en:"We wrote the brand strategy and the Feb–Ramadan content plan, then shipped reels and posts for Egypt and the UAE."}},
+ {logo:"ciib",k:"4 weeks",t:{ar:"إطلاق CIIB",en:"CIIB launch"},d:{ar:"خطة إطلاق 4 أسابيع: إيه اللي ينزل كل أسبوع، وليه.",en:"A 4-week launch plan: what goes out each week, and why."}}
+];
+
+const GROUPS=[["all"],["2xko","2XKO","2xko"],["qabda",{ar:"قبضة",en:"Qabda"},"qabda"],["infinix","Infinix","infinix"],["lazeez",{ar:"لذيذ الشام",en:"Lazeez El Sham"},"lazeez"],["compuart","CompuArt","compuart"],["nerve","NerveHQ","nervehq"],["tyres","TyresOnline","tyres"],["darak","Darak KSA","darak"],["eleven","11:11","eleven"],["mta","MTA Travel","mta"],["ciib","CIIB","ciib"]];
+const GLOGO=Object.fromEntries(GROUPS.filter(g=>g[2]).map(g=>[g[0],g[2]]));
+
+const TT=(id,u)=>({p:"TikTok",th:id,url:`https://www.tiktok.com/@${u||"fwz_esports"}/video/${id}`});
+const IG=c=>({p:"Instagram",th:c,url:`https://www.instagram.com/reel/${c}/`});
+const FB=id=>({p:"Facebook",th:"fb"+id,url:`https://www.facebook.com/reel/${id}`});
+const LI=a=>({p:"LinkedIn",th:"li"+a,url:`https://www.linkedin.com/feed/update/urn:li:activity:${a}/`});
+
+const WORK=[
+ {g:"2xko",v:"1.64M",t:{ar:"طلبة نيو جيزة أول مرة يجرّبوها",en:"New Giza students try it first"},...TT("7590024074282142992")},
+ {g:"lazeez",v:"1.23M",t:{ar:"لما الفراخ تتسحب من السيخ",en:"When the chicken leaves the skewer"},...TT("7702832627035770133","lazizelsham")},
+ {g:"2xko",v:"1.17M",t:{ar:"رأي طلبة جامعة العاصمة",en:"Capital University reacts"},...TT("7584805008894610708")},
+ {g:"2xko",v:"953K",t:{ar:"طلبة SUT بيقولوا إيه",en:"What SUT students said"},...TT("7581866171146784008")},
+ {g:"compuart",v:"630K+",t:{ar:"إعلان تجميعات الكمبيوتر",en:"Custom PC ad"},p:"Facebook",url:"https://www.facebook.com/956356331090944/posts/1505202591650897",note:{ar:"إعلان ممول · 3 نسخ",en:"Paid · 3 versions"}},
+ {g:"qabda",v:"452K",t:{ar:"هتلاقي إيه في قبضة",en:"What's waiting at Qabda"},...TT("7634651636220054792")},
+ {g:"infinix",v:"351K",t:{ar:"يوم Infinix في الجامعة",en:"Infinix day on campus"},...TT("7584501612803001620")},
+ {g:"qabda",v:"239K",t:{ar:"اختبار الثقة",en:"The trust test"},...TT("7635663145482079505")},
+ {g:"qabda",v:"190K",t:{ar:"وده واحد فاته",en:"The guy who missed it"},...TT("7635669343023435025")},
+ {g:"lazeez",v:"105K",t:{ar:"هو إنت شيف؟",en:"You call yourself a chef?"},...FB("1057209213729841")},
+ {g:"qabda",v:"102K",t:{ar:"اللي جاب التذكرة واللي فضل يسكرول",en:"Bought a ticket vs. kept scrolling"},...TT("7635258428973124871")},
+ {g:"lazeez",v:"90K",t:{ar:"الفراخ والسيخ (فيسبوك)",en:"The skewer (Facebook)"},...FB("1084867821033044")},
+ {g:"lazeez",v:"78K",t:{ar:"أكتر حاجة بتتسرق في المطعم",en:"Most stolen thing in the restaurant"},...FB("1627232165425836")},
+ {g:"lazeez",v:"73K",t:{ar:"تحذير: اشتري اتنين",en:"Warning: buy two"},...TT("7673119208703528200","lazizelsham")},
+ {g:"nerve",v:"61K+",t:{ar:"NerveHQ لشركات البرمجة",en:"NerveHQ for software houses"},p:"Facebook",url:"https://www.facebook.com/956356331090944/posts/1505191961651960",note:{ar:"فيديو شرح",en:"Explainer"}},
+ {g:"lazeez",v:"60K",t:{ar:"قطط الفرايد تشيكن",en:"The fried chicken cats"},...FB("2315854579260129")},
+ {g:"compuart",v:"55K+",t:{ar:"الكمبيوتر المناسب للطلبة",en:"The right PC for students"},p:"Facebook",url:"https://www.facebook.com/956356331090944/posts/1517818743722615"},
+ {g:"lazeez",v:"43K",t:{ar:"عرض رجوع المدارس",en:"Back-to-school offer"},...FB("2454589875074671")},
+ {g:"lazeez",v:"38K",t:{ar:"7 عروض مرة واحدة",en:"7 offers at once"},...FB("1060962209734755")},
+ {g:"compuart",v:"23K+",t:{ar:"تجميعة ولا جهاز جاهز؟",en:"Custom build or prebuilt?"},p:"Facebook",url:"https://www.facebook.com/956356331090944/posts/1517828610388295"},
+ {g:"lazeez",v:"22K",t:{ar:"تعالى ساعدني يا شيف",en:"Help me, chef"},...TT("7674953908250365201","lazizelsham")},
+ {g:"nerve",v:"17K+",t:{ar:"ChatGPT ولا NerveHQ؟",en:"ChatGPT or NerveHQ?"},p:"Facebook",url:"https://www.facebook.com/956356331090944/posts/1545136904324132"},
+ {g:"lazeez",v:"15K",t:{ar:"أكتر حاجة بتتسرق (تيك توك)",en:"Most stolen thing (TikTok)"},...TT("7686086845595274503","lazizelsham")},
+ {g:"lazeez",v:"10K",t:{ar:"ريفيو القطة",en:"The cat's review"},...TT("7673575762233969936","lazizelsham")},
+ {g:"qabda",t:{ar:"من جوّه الإيفنت",en:"Inside the event"},...TT("7637529228568792328")},
+ {g:"compuart",t:{ar:"الرامات: المساحة ولا السرعة؟",en:"RAM: size or speed?"},...IG("DfnLsftAXRM")},
+ {g:"compuart",t:{ar:"شاشتك 144 وشغالة على 60",en:"Your 144Hz screen is stuck at 60"},...IG("DffdX0kj3Aj")},
+ {g:"compuart",t:{ar:"لابتوب ولا كمبيوتر للكلية؟",en:"Laptop or PC for college?"},...IG("DdO1ZQnj8eE")},
+ {g:"compuart",t:{ar:"لابتوب ابنك للكلية بكام؟",en:"What a college laptop costs"},...IG("Dc3OxrsjQ8Z")},
+ {g:"compuart",t:{ar:"قبل ما تشتري لابتوب الكلية",en:"Before you buy a college laptop"},...IG("Dc1g2-akRE2")},
+ {g:"compuart",t:{ar:"5 حاجات بتضيّع منك FPS",en:"5 things costing you FPS"},...IG("DdkEvmDj6Qg")},
+ {g:"compuart",t:{ar:"كل قسم ومحتاج إيه",en:"What each department needs"},...IG("DdRaKk3DDxy")},
+ {g:"compuart",t:{ar:"متستناش الجهاز يعطل",en:"Don't wait for the breakdown"},...IG("Dd9geEMFNk_")},
+ {g:"compuart",t:{ar:"الموظف الجديد بيكلّفك كام فعلاً",en:"What a new hire really costs"},...IG("DfB9FoKoOXE")},
+ {g:"compuart",t:{ar:"الرخيص اللي طلع غالي",en:"The cheap option that cost more"},...IG("DfRgvEKicse")},
+ {g:"compuart",t:{ar:"إزاي قللنا وقت الرندر في مصنع",en:"Cutting a factory's render time"},...IG("DfT-ju-CXhk")},
+ {g:"compuart",t:{ar:"تختار خطة الدعم إزاي",en:"Picking an IT support plan"},...IG("DfnLpn4jdig")},
+ {g:"compuart",t:{ar:"السيرفر اللي وقّف يوم شغل",en:"The server that cost a whole day"},...IG("Dfkm3Exil0_")},
+ ...[["7526570401485881344",{ar:"الـ ERP والـ AI",en:"ERP & AI"}],["7525482532868521984",{ar:"أتمتة الشغل",en:"Business automation"}],["7523670992246976512",{ar:"إزاي تاخد قرار",en:"Making decisions"}],["7522946229237088256",{ar:"الإدارة العليا",en:"C-level leadership"}],["7520756350897774592",{ar:"السوفتوير والنمو",en:"Software & growth"}],["7520032666377830400",{ar:"الـ AI agents والتوظيف",en:"AI agents & hiring"}],["7518220315320066049",{ar:"استلام الموظف الجديد",en:"Onboarding"}],["7517494716297441280",{ar:"الـ AI agents في التشغيل",en:"AI agents in operations"}],["7515682868812132353",{ar:"توزيع المهام",en:"Delegation"}]].map(([a,n])=>({g:"nerve",t:n,...LI(a)})),
+ ...[["reel/DUyGcZiAUTH","UAE"],["reel/DTSz5HCkjjm","UAE"],["reel/DQY8csNiZuX","UAE"],["p/DVtLuwKjAf4","UAE"],["p/DXHxFrVD1N0","UAE"]].map(([c,m])=>({g:"tyres",t:"TyresOnline "+m,p:"Instagram",url:`https://www.instagram.com/tyresonlineuae/${c}/`,note:c[0]==="r"?"Reel":"Post"})),
+ ...[["reel/DU6kzJ_gtbv"],["reel/DVOvwsPjxEm"],["reel/DVBw_heE3LT"],["p/DW6m2WejgN8"],["p/DU5Sswgj27s"]].map(([c])=>({g:"tyres",t:{ar:"TyresOnline مصر",en:"TyresOnline Egypt"},p:"Instagram",url:`https://www.instagram.com/tyresonline.eg/${c}/`,note:c[0]==="r"?"Reel":"Post"})),
+ {g:"tyres",t:{ar:"استراتيجية براند TyresOnline",en:"TyresOnline brand strategy"},p:"PDF",url:"https://drive.google.com/file/d/1ofyDsMPeuynmiC-nVcT2rOlAGccxwxdl/view"},
+ ...["7628234200277191952","7628214742556904721","7628203676175305991","7628197262258310420","7628231922128342290"].map((id,i)=>({g:"darak",t:{ar:"Darak: فيديو AI "+(i+1),en:"Darak: AI video "+(i+1)},p:"TikTok",url:`https://www.tiktok.com/@darak.ksa/video/${id}`})),
+ ...["reel/DXZy19Qj13O","reel/DXMz1xzjCIQ","reel/DWZNcnJAKOQ","p/DXU2xTrClF-","p/DWedi6JDaK-","p/DS0IdSVjhB3"].map(c=>({g:"eleven",t:"11:11 Production",p:"Instagram",url:`https://www.instagram.com/eleveneleven.productions/${c}/`,note:c[0]==="r"?"Reel":"Post"})),
+ ...["reel/DU5Vj1YjIkS","reel/DVWhPKuiCEB","reel/DVf0LGRlaLU","reel/DWdTOUIisQo","p/DVZmc1UFh1D"].map(c=>({g:"mta",t:"MTA Travel",p:"Instagram",url:`https://www.instagram.com/elmariamtravelagency/${c}/`,note:c[0]==="r"?"Reel":"Post"})),
+ {g:"ciib",t:{ar:"خطة إطلاق CIIB",en:"CIIB launch plan"},p:"Plan",url:null,note:{ar:"4 أسابيع",en:"4 weeks"}}
+];
+
+const SERVICES=[
+ {t:{ar:"إدارة الصفحات",en:"Page management"},d:{ar:"بننزّل ونرد على الكومنتات والرسايل، وآخر كل شهر بتعرف وصلنا لفين.",en:"We post, answer comments and messages, and every month you see where things stand."}},
+ {t:{ar:"استراتيجية وخطة محتوى",en:"Strategy & content plans"},d:{ar:"قبل ما نصوّر أي حاجة بنفهم البراند بيكلّم مين وعايز يقول إيه.",en:"Before we shoot anything, we figure out who the brand is talking to and what it wants to say."}},
+ {t:{ar:"أفكار وسكريبتات",en:"Ideas & scripts"},d:{ar:"أفكار بلغة الناس، مكتوبة سطر سطر وجاهزة تتصوّر.",en:"Ideas in the way people actually talk, written line by line and ready to shoot."}},
+ {t:{ar:"تصوير",en:"Shooting"},d:{ar:"بالموبايل أو بالكاميرا، عندك في المكان أو في الإيفنت.",en:"Phone or camera, at your place or at the event."}},
+ {t:{ar:"مونتاج",en:"Editing"},d:{ar:"ريلز إيقاعها سريع، وكابشن يتقري حتى لو الصوت مقفول.",en:"Fast-paced reels with captions that work with the sound off."}},
+ {t:{ar:"تصميم ومحتوى بالـ AI",en:"Design & AI content"},d:{ar:"بنستخدم أدوات الـ AI عشان نشتغل أسرع، والتشطيب بإيدينا.",en:"We use AI tools to move faster; the finishing is by hand."}},
+ {t:{ar:"هوية بصرية",en:"Brand identity"},d:{ar:"لوجو وألوان وخطوط تخلّي البراند باين من أول بوست.",en:"A logo, colours and type that make the brand recognisable from the first post."}},
+ {t:{ar:"إعلانات ممولة",en:"Paid ads"},d:{ar:"حملات على فيسبوك وإنستجرام بنتابع أرقامها أول بأول ونعدّل.",en:"Facebook and Instagram campaigns we watch closely and adjust as we go."}},
+ {t:{ar:"تغطية إيفنتات",en:"Event coverage"},d:{ar:"برومو قبل الإيفنت، تغطية وهو شغال، وملخص بعد ما يخلص.",en:"Promo before, coverage during, a recap after."}}
+];
+const STEPS=[
+ {t:{ar:"نتكلم",en:"We talk"},d:{ar:"مكالمة أو رسالة واتساب نعرف فيها شغلك وعايز توصل لإيه.",en:"A call or a WhatsApp chat about your business and where you want to get."}},
+ {t:{ar:"نجهّز ونصوّر",en:"We prep and shoot"},d:{ar:"نبعتلك الأفكار والسكريبت، ولما توافق نصوّر ونمنتج.",en:"We send you the ideas and script; once you're happy, we shoot and edit."}},
+ {t:{ar:"مفيش حاجة تنزل من غيرك",en:"Nothing goes out without you"},d:{ar:"كل بوست وكل فيديو بيعدّي عليك الأول.",en:"Every post and every video goes past you first."}}
+];
+const TOOLS=["Premiere Pro","Photoshop","CapCut","Canva","ChatGPT","Claude","Gemini","ElevenLabs","RunwayML","Sora","Pika","Meta Ads Manager","Meta Business Suite"];
+
+/* ---------- منطق ---------- */
+let lang=(()=>{try{const s=localStorage.getItem("lq-lang");if(s==="ar"||s==="en")return s}catch(e){}return "ar"})();
+let filter="all",expanded=false;const PAGE=16;
+const $=id=>document.getElementById(id);
+const L=v=>v&&typeof v==="object"?v[lang]:v;
+const t=k=>T[lang][k];
+const h=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let io;
+function observe(root){
+  if(!io)io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);if(e.target.dataset.count!==undefined)countUp(e.target)}}),{threshold:.15,rootMargin:"0px 0px -40px 0px"});
+  (root||document).querySelectorAll(".rv:not(.in),.step:not(.in),[data-count]").forEach(el=>io.observe(el));
+}
+function countUp(el){
+  const raw=el.dataset.count,m=raw.match(/([\d.]+)(.*)/);if(!m||RM){el.textContent=raw;return}
+  const end=parseFloat(m[1]),suf=m[2],dec=(m[1].split(".")[1]||"").length,t0=performance.now(),D=1600;
+  const tick=n=>{const p=Math.min(1,(n-t0)/D),e=1-Math.pow(1-p,3);el.textContent=(end*e).toFixed(dec)+suf;if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick);
+}
+
+function applyStatic(){
+  document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-i18n]").forEach(e=>e.textContent=t(e.dataset.i18n));
+  const acc=T[lang].heroAcc;
+  $("heroTitle").innerHTML=T[lang].hero.map((w,i)=>`<span class="hw" style="--i:${i}">${acc.includes(i)?`<em>${h(w)}</em>`:h(w)}</span>`).join(" ");
+  $("langBtn").textContent=lang==="ar"?"EN":"عربي";
+  document.querySelectorAll(".wa").forEach(a=>a.href=`https://wa.me/${WHATSAPP}`);
+  $("stats").innerHTML=[["7.1M+","s1"],["17","s2"],["3","s3"],["560K+","s4"]].map(([n,a])=>`<div class="stat"><b data-count="${n}">0</b><span>${t(a)}</span></div>`).join("");
+}
+function renderStrip(){
+  const items=WORK.filter(w=>w.th&&IMG["th-"+w.th]);
+  const half=Math.ceil(items.length/2);
+  const row=list=>{const s=list.map(w=>`<a class="reel" href="${h(w.url)}" target="_blank" rel="noopener"><img src="${im("th-"+w.th)}" alt="" loading="lazy">${w.v?`<span>${h(w.v)}</span>`:""}</a>`).join("");return s+s};
+  $("strip1").innerHTML=row(items.slice(0,half));$("strip2").innerHTML=row(items.slice(half));
+}
+function renderClients(){
+  const tile=([k,n])=>`<div class="lgw"><div class="lg${FIT_CT.has(k)?" ct":""}"><img src="${im("logo-"+k)}" alt="${h(L(n))}" loading="lazy"></div><span class="lg-name"><bdi>${h(L(n))}</bdi></span></div>`;
+  const a=CLIENTS.slice(0,9),b=CLIENTS.slice(9);
+  $("logoTrack").innerHTML=(a.map(tile).join("")).repeat(2);
+  $("logoTrack2").innerHTML=(b.concat(a.slice(0,1)).map(tile).join("")).repeat(2);
+}
+function renderCases(){
+  $("caseGrid").innerHTML=CASES.map((c,i)=>`<article class="case rv zoom" style="--d:${i%2*.12}s"><div class="bg" style="background-image:url('${im("th-"+c.bg)}')"></div><i class="corner c1"></i><i class="corner c2"></i><span class="rd">REC</span><div class="in"><div class="clogo"><img src="${im("logo-"+c.logo)}" alt=""></div><div class="tag">${h(L(c.tag))}</div><h3>${h(L(c.name))}</h3><p>${h(L(c.d))}</p><div><span class="num" data-count="${c.num}">0</span><small style="color:var(--mut);margin-inline-start:8px">${t("views")}</small></div>${c.fwz?`<span class="badge">${t("prod_fwz")}</span>`:""}</div></article>`).join("");
+  $("stratGrid").innerHTML=STRAT.map((s,i)=>`<div class="box rv" style="--d:${i*.1}s"><div class="top"><img src="${im("logo-"+s.logo)}" alt="" style="${FIT_CT.has(s.logo)?"object-fit:contain;padding:3px":""}"><div class="k">${h(s.k)}</div></div><h3>${h(L(s.t))}</h3><p>${h(L(s.d))}</p></div>`).join("");
+}
+function renderChips(){
+  $("chips").innerHTML=GROUPS.map(([k,n,lg])=>k==="all"?`<button class="chip all${filter==="all"?" on":""}" data-g="all" type="button">${t("all")}</button>`:`<button class="chip${k===filter?" on":""}" data-g="${k}" type="button"><img src="${im("logo-"+lg)}" alt="">${h(L(n))}</button>`).join("");
+  $("chips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{filter=b.dataset.g;expanded=false;renderChips();renderWork()});
+}
+function card(w,i){
+  const thumb=w.th&&IMG["th-"+w.th];
+  let th;
+  if(thumb)th=`<div class="th"><img src="${thumb}" alt="" loading="lazy">`;
+  else{const lg=GLOGO[w.g],src=im("logo-"+lg);th=`<div class="th lo"><img class="blur" src="${src}" alt=""><img class="mark${FIT_CT.has(lg)?" ct":""}" src="${src}" alt="" loading="lazy">`}
+  th+=`<span class="plat">${h(w.p)}</span>${w.v?`<span class="views">${h(w.v)}</span>`:""}${w.url?'<span class="play"></span>':""}</div>`;
+  const sub=w.note?L(w.note):"";
+  const meta=`<div class="meta"><b>${h(L(w.t))}</b>${sub?`<span>${h(sub)}</span>`:""}</div>`;
+  const st=`style="--i:${i%PAGE}"`;
+  return w.url?`<a class="w" ${st} href="${h(w.url)}" target="_blank" rel="noopener">${th}${meta}</a>`:`<div class="w" ${st}>${th}${meta}</div>`;
+}
+function renderWork(){
+  const list=WORK.filter(w=>filter==="all"||w.g===filter);
+  const shown=expanded||filter!=="all"?list:list.slice(0,PAGE);
+  $("workGrid").innerHTML=shown.map(card).join("");
+  const b=$("moreBtn");
+  if(filter==="all"&&list.length>PAGE){b.style.display="";b.textContent=expanded?t("less"):`${t("more")} (${list.length-PAGE})`}else b.style.display="none";
+}
+function renderServices(){
+  $("svcGrid").innerHTML=SERVICES.map((s,i)=>`<div class="box rv" style="--d:${(i%3)*.08}s"><div class="n">${String(i+1).padStart(2,"0")}</div><h3>${h(L(s.t))}</h3><p>${h(L(s.d))}</p></div>`).join("");
+  $("steps").innerHTML=STEPS.map((s,i)=>`<div class="step rv" style="--d:${i*.2}s"><b><i>0${i+1}</i>${h(L(s.t))}</b><p>${h(L(s.d))}</p></div>`).join("");
+  $("tools").innerHTML=TOOLS.concat(TOOLS).map(x=>`<span>${h(x)}</span>`).join("");
+  document.querySelectorAll(".svc .box").forEach(b=>b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();b.style.setProperty("--x",e.clientX-r.left+"px");b.style.setProperty("--y",e.clientY-r.top+"px")}));
+}
+function renderAll(){applyStatic();renderStrip();renderClients();renderCases();renderChips();renderWork();renderServices();observe()}
+$("langBtn").onclick=()=>{lang=lang==="ar"?"en":"ar";try{localStorage.setItem("lq-lang",lang)}catch(e){}renderAll()};
+$("moreBtn").onclick=()=>{expanded=!expanded;renderWork();if(!expanded)$("work").scrollIntoView()};
+
+/* حركات عامة */
+const hero=$("top");
+hero.addEventListener("pointermove",e=>{const r=hero.getBoundingClientRect();hero.style.setProperty("--mx",e.clientX-r.left+"px");hero.style.setProperty("--my",e.clientY-r.top+"px")});
+let f=0;setInterval(()=>{f++;const fr=f%25,s=Math.floor(f/25),p=n=>String(n).padStart(2,"0");$("tc").textContent=`00:${p(Math.floor(s/60)%60)}:${p(s%60)}:${p(fr)}`},40);
+let ticking=false;
+addEventListener("scroll",()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{
+  const y=scrollY,H=document.documentElement.scrollHeight-innerHeight;
+  $("bar").style.width=(H>0?y/H*100:0)+"%";
+  $("nav").classList.toggle("sc",y>10);
+  $("fab").classList.toggle("on",y>innerHeight*.7);
+  if(!RM)document.querySelectorAll(".case").forEach(c=>{const r=c.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){c.querySelector(".bg").style.setProperty("--py",((r.top+r.height/2-innerHeight/2)*-.06).toFixed(1)+"px")}});
+  ticking=false})},{passive:true});
+renderAll();
+</script>
+</body>
+</html>
